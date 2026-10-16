@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="de" class="h-full w-full overflow-hidden">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>IRREGULAR ENGLISH PAST VERBS - Mindmap Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Roboto+Condensed:wght@700&family=Inter:wght@400;500;600;700&display=swap');
+    
+    * {
+      touch-action: manipulation;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      height: 100dvh;
+      width: 100vw;
+      overflow: hidden !important;
+      position: fixed;
+      font-family: 'Inter', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #f1f5f9;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .font-header {
+      font-family: 'Oswald', 'Roboto Condensed', sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* Color scheme matching reference */
+    .box-unchanging { background-color: #e0f2fe; border: 2px solid #38bdf8; color: #0369a1; }
+    .box-flyers { background-color: #fae8ff; border: 2px solid #c084fc; color: #7e22ce; }
+    .box-vowel { background-color: #ffedd5; border: 2px solid #fb923c; color: #c2410c; }
+    .box-enders { background-color: #ffe4e6; border: 2px solid #f43f5e; color: #be123c; }
+    .box-unique { background-color: #ccfbf1; border: 2px solid #2dd4bf; color: #0f766e; }
+    .box-td { background-color: #dcfce7; border: 2px solid #4ade80; color: #15803d; }
+    .box-ought { background-color: #e0e7ff; border: 2px solid #818cf8; color: #3730a3; }
+    .box-boomerangs { background-color: #fef9c3; border: 2px solid #facc15; color: #a16207; }
+
+    .node-badge {
+      width: clamp(24px, 3vh, 32px);
+      height: clamp(24px, 3vh, 32px);
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border: 2px solid currentColor;
+      flex-shrink: 0;
+    }
+
+    .drop-zone-active {
+      transform: scale(1.01);
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+      border-style: dashed !important;
+    }
+
+    #timerBar {
+      transition: width 0.1s linear;
+    }
+
+    /* Gesuchte Form in Level 3: fett & farbig */
+    .target-form {
+      color: #e11d48;
+      background: #ffe4e6;
+      border: 1px solid #fda4af;
+      border-radius: 6px;
+      padding: 0 6px;
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Hervorgehobenes Wort in der Aufgabenstellung (Level 1) */
+    .prompt-word {
+      color: #1e293b;
+      background: #e2e8f0;
+      border-radius: 6px;
+      padding: 0 6px;
+      font-weight: 800;
+    }
+
+    /* Blitz-Bonus: Animationen */
+    @keyframes blitzPop {
+      0%   { transform: scale(.3) rotate(-10deg); opacity: 0; }
+      55%  { transform: scale(1.4) rotate(5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    .blitz-pop { animation: blitzPop .5s cubic-bezier(.2, 1.4, .4, 1) both; }
+
+    @keyframes counterBump {
+      0%, 100% { transform: scale(1); }
+      40%      { transform: scale(1.7); }
+    }
+    .bump { animation: counterBump .55s ease; }
+
+    @keyframes blitzGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0), 0 25px 50px -12px rgba(0,0,0,.25); }
+      50%      { box-shadow: 0 0 45px 12px rgba(251, 191, 36, .75), 0 25px 50px -12px rgba(0,0,0,.25); }
+    }
+    .blitz-glow { animation: blitzGlow .8s ease-in-out 2; }
+
+    /* Touch Drag Ghost Element */
+    .touch-drag-ghost {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.9;
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body class="h-full w-full flex flex-col justify-between p-1 sm:p-2 text-slate-800">
+
+  <!-- HEADER -->
+  <header class="h-[6vh] min-h-[38px] max-h-[48px] bg-white/95 backdrop-blur-md rounded-xl border border-slate-200 px-3 flex justify-between items-center shadow-xs z-30 shrink-0">
+    <div class="flex items-center gap-2">
+      <button id="homeBtn" class="bg-slate-100 hover:bg-slate-200 active:scale-95 text-slate-700 px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1.5 transition">
+        <i class="fa-solid fa-house text-xs"></i>
+        <span>Übersicht</span>
+      </button>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-sitemap text-indigo-600 text-sm"></i>
+        <h1 class="font-header text-xs sm:text-sm md:text-base font-bold uppercase tracking-wider text-slate-900 truncate">
+          IRREGULAR ENGLISH PAST VERBS
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <!-- Stars Counter (Summe aller Level) -->
+      <div class="bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-xs">
+        <i class="fa-solid fa-star text-amber-400 text-xs sm:text-sm"></i>
+        <span class="font-bold text-amber-700 text-xs hidden sm:inline">Sterne:</span>
+        <span id="totalStarsCount" class="font-bold text-amber-600 text-xs sm:text-sm">0</span>
+        <span class="text-[10px] text-amber-500 font-bold">/ 100</span>
+      </div>
+
+      <button id="ttsToggleBtn" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 p-1.5 rounded-full transition" title="Ton &amp; Vorlesen an/aus">
+        <i id="ttsIcon" class="fa-solid fa-volume-high text-xs sm:text-sm"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 h-[92vh] flex flex-col items-center justify-between overflow-hidden my-1">
+
+    <!-- MENU SCREEN -->
+    <section id="menuScreen" class="w-full h-full max-w-4xl flex flex-col justify-center items-center px-2 py-1">
+      <div class="text-center mb-3">
+        <h2 class="font-header text-lg sm:text-2xl font-bold text-slate-800 tracking-wide">GROUPING PATTERNS FOR MEMORIZATION</h2>
+        <p class="text-slate-500 text-xs">Pro Level kannst du bis zu 20 Sterne sammeln. Jeder Durchgang hat 10 Wörter. Mit «Übersicht» pausierst du eine Runde und setzt sie später fort.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 w-full max-w-3xl">
+        <!-- Level 1 -->
+        <button onclick="startLevel(1)" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-emerald-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 1</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-600">
+              <i class="fa-solid fa-star text-amber-400"></i>
+              <span id="level1Stars">0 / 20</span>
+            </div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-emerald-600">1. Übersetzungs-Suche</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Deutsches Wort oben -> Klicke das richtige Verb im Mindmap an.</p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2"><div id="level1Bar" class="bg-amber-400 h-full" style="width:0%"></div></div>
+          <div id="level1Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+        <!-- Level 2 -->
+        <button onclick="startLevel(2)" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-indigo-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-indigo-100 text-indigo-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 2</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-600">
+              <i class="fa-solid fa-star text-amber-400"></i>
+              <span id="level2Stars">0 / 20</span>
+            </div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-indigo-600">2. Mindmap Drag &amp; Drop</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Ziehe das angezeigte Verb in die passende Mindmap-Gruppe.</p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2"><div id="level2Bar" class="bg-amber-400 h-full" style="width:0%"></div></div>
+          <div id="level2Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+        <!-- Level 3 -->
+        <button onclick="startLevel(3)" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-purple-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 3</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-600">
+              <i class="fa-solid fa-star text-amber-400"></i>
+              <span id="level3Stars">0 / 20</span>
+            </div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-purple-600">3. Exakte Form-Suche</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Markierte deutsche Form -> Klicke die passende englische Form im Mindmap an.</p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2"><div id="level3Bar" class="bg-amber-400 h-full" style="width:0%"></div></div>
+          <div id="level3Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+        <!-- Level 4 -->
+        <button onclick="startLevel(4)" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-sky-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-sky-100 text-sky-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 4</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-600">
+              <i class="fa-solid fa-star text-amber-400"></i>
+              <span id="level4Stars">0 / 20</span>
+            </div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-sky-600">4. Selber schreiben</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Markierte deutsche Form -> Tippe die gesuchte englische Form selbst ein.</p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2"><div id="level4Bar" class="bg-amber-400 h-full" style="width:0%"></div></div>
+          <div id="level4Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+        <!-- Level 5 -->
+        <button onclick="startLevel(5)" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-amber-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 5</span>
+            <div class="flex items-center gap-1 text-xs font-bold text-amber-600">
+              <i class="fa-solid fa-star text-amber-400"></i>
+              <span id="level5Stars">0 / 20</span>
+            </div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-amber-600">5. Lückentext</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Ergänze die fehlende Form im Englischsatz. Die deutsche Übersetzung zeigt, welche Form gesucht ist.</p>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-2"><div id="level5Bar" class="bg-amber-400 h-full" style="width:0%"></div></div>
+          <div id="level5Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+
+        <!-- Level 6 -->
+        <button onclick="openLevel6()" class="bg-white p-3 sm:p-4 rounded-xl shadow-xs border-2 border-indigo-100 hover:border-rose-500 transition text-left group">
+          <div class="flex justify-between items-center mb-1">
+            <span class="bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded text-[10px] font-header">LEVEL 6</span>
+            <div id="level6Info" class="text-[11px] font-bold text-slate-500">---</div>
+          </div>
+          <h3 class="font-header text-sm sm:text-base font-bold text-slate-800 group-hover:text-rose-600">6. Lern-Radar &amp; Schwächen-Training</h3>
+          <p class="text-slate-500 text-[11px] leading-tight">Sieh, welche Verben sitzen (grün) und welche noch wackeln (rot), und trainiere gezielt die roten.</p>
+          <div id="level6Resume" class="hidden mt-1.5 text-[11px] font-bold text-indigo-600 flex items-center justify-between"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <div id="gameScreen" class="w-full h-full flex flex-col justify-between hidden overflow-hidden">
+      
+      <!-- TOP STATUS & 18s TIMER BAR -->
+      <div id="statusBar" class="min-h-[42px] bg-white px-3 py-1 rounded-xl shadow-xs border border-slate-200 flex flex-col justify-between shrink-0 mb-1">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 shrink-0">
+            <span id="levelBadge" class="bg-indigo-600 text-white px-2 py-0.5 rounded text-[10px] font-bold font-header">LEVEL 1</span>
+            <span id="queueProgressText" class="text-[11px] font-bold text-slate-500">Rest: 10</span>
+          </div>
+
+          <div id="promptDisplay" class="text-xs sm:text-sm font-semibold text-slate-500 text-center leading-tight flex-1 px-1">
+            ---
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="text-[11px] text-amber-500 font-bold flex items-center gap-1" title="Blitz-Antworten (schnell &amp; richtig beim ersten Versuch)">
+              <i class="fa-solid fa-bolt"></i> <span id="blitzCounter">0</span>
+            </div>
+            <div class="text-[11px] text-rose-500 font-bold flex items-center gap-1">
+              <i class="fa-solid fa-circle-exclamation"></i> <span id="errorCounter">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18 SECONDS TIMER BAR -->
+        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200 mt-1">
+          <div id="timerBar" class="bg-emerald-500 h-full w-full"></div>
+        </div>
+      </div>
+
+      <!-- LEVEL 2: DRAG & DROP CARD BAR -->
+      <div id="dragHeader" class="h-[6vh] min-h-[38px] max-h-[46px] bg-white px-3 rounded-xl shadow-xs border border-slate-200 mb-1 flex items-center justify-center gap-3 shrink-0 hidden">
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider hidden sm:inline">Ziehe das Wort ins Mindmap:</span>
+        <div id="draggableWord" draggable="true" class="bg-indigo-600 text-white text-xs sm:text-sm font-bold px-5 py-1 rounded-lg shadow cursor-grab active:cursor-grabbing hover:bg-indigo-700 transition">
+          ---
+        </div>
+      </div>
+
+      <!-- LEVEL 5: OVERVIEW HEADER (Legende + Trainieren) -->
+      <div id="overviewHeader" class="min-h-[42px] bg-white px-3 py-1 rounded-xl shadow-xs border border-slate-200 mb-1 flex items-center justify-between gap-2 shrink-0 hidden">
+        <div class="flex items-center gap-1 flex-wrap text-[10px] font-bold">
+          <span class="hidden sm:inline text-slate-400 uppercase mr-1">Stufen:</span>
+          <span class="px-1.5 py-0.5 rounded" style="background:#fecaca;color:#991b1b">-2</span>
+          <span class="px-1.5 py-0.5 rounded" style="background:#fee2e2;color:#dc2626">-1</span>
+          <span class="px-1.5 py-0.5 rounded border border-slate-200" style="color:#0f172a">0</span>
+          <span class="px-1.5 py-0.5 rounded" style="background:#dcfce7;color:#16a34a">+1</span>
+          <span class="px-1.5 py-0.5 rounded" style="background:#bbf7d0;color:#166534">+2</span>
+        </div>
+        <button id="trainBtn" onclick="startTraining()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-4 py-1.5 rounded-xl text-xs font-header tracking-wider transition shrink-0">TRAINIEREN</button>
+      </div>
+
+      <!-- MINDMAP CANVAS: EXACT 3-COLUMN STRUCTURE FIXED IN SINGLE SCREEN -->
+      <div id="mindmapCanvas" class="flex-1 h-[78vh] grid grid-cols-3 gap-1.5 sm:gap-2 overflow-hidden">
+        
+        <!-- Col 1: Left (Unchanging & Flyers) -->
+        <div class="flex flex-col gap-1.5 h-full overflow-hidden">
+          <div id="zone-unchanging" data-cat="unchanging" class="drop-zone box-unchanging h-[48%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+          <div id="zone-flyers" data-cat="flyers" class="drop-zone box-flyers h-[50%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+        </div>
+
+        <!-- Col 2: Center (Vowel shift, -en enders, Truly Unique) -->
+        <div class="flex flex-col gap-1.5 h-full overflow-hidden">
+          <div id="zone-vowel" data-cat="vowel" class="drop-zone box-vowel h-[32%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+          <div id="zone-enders" data-cat="enders" class="drop-zone box-enders h-[42%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+          <div id="zone-unique" data-cat="unique" class="drop-zone box-unique h-[22%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+        </div>
+
+        <!-- Col 3: Right (t & d transformers, -ought/-aught, Boomerangs) -->
+        <div class="flex flex-col gap-1.5 h-full overflow-hidden">
+          <div id="zone-td" data-cat="td" class="drop-zone box-td h-[48%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+          <div id="zone-ought" data-cat="ought" class="drop-zone box-ought h-[28%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+          <div id="zone-boomerangs" data-cat="boomerangs" class="drop-zone box-boomerangs h-[22%] p-1.5 rounded-xl shadow-2xs transition flex flex-col justify-between overflow-hidden"></div>
+        </div>
+
+      </div>
+
+      <!-- LEVEL 4: SELBER SCHREIBEN -->
+      <div id="typeUI" class="flex-1 flex flex-col items-center justify-center hidden">
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 max-w-lg w-full text-center">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Schreibe die markierte Form auf Englisch</p>
+          <p id="typePrompt" class="text-base sm:text-lg font-medium text-slate-500 mb-4 leading-relaxed">
+            ---
+          </p>
+
+          <div class="flex gap-2 max-w-xs mx-auto">
+            <input type="text" id="typeInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Englische Form..." class="flex-1 border-2 border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-center focus:outline-none focus:border-sky-500 transition">
+            <button onclick="checkTypeAnswer()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition font-header">
+              PRÜFEN
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL 5: LÜCKENTEXT -->
+      <div id="gapUI" class="flex-1 flex flex-col items-center justify-center hidden">
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 max-w-lg w-full text-center">
+          <p id="lueckenSentence" class="text-base sm:text-lg font-medium text-slate-800 mb-2 leading-relaxed">
+            ---
+          </p>
+          <p id="lueckenGerman" class="text-sm sm:text-base text-slate-600 mb-4 leading-relaxed bg-slate-50 border border-slate-200 rounded-xl px-3 py-2">
+            ---
+          </p>
+
+          <div class="flex gap-2 max-w-xs mx-auto">
+            <input type="text" id="lueckenInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Antwort..." class="flex-1 border-2 border-slate-300 rounded-xl px-3 py-2 text-sm font-bold text-center focus:outline-none focus:border-indigo-500 transition">
+            <button onclick="checkGapAnswer()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition font-header">
+              PRÜFEN
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- OVERLAYS AND MODALS -->
+  <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none hidden" style="z-index:60"></canvas>
+  <div id="successOverlay" class="fixed inset-0 bg-indigo-900/30 backdrop-blur-xs flex items-center justify-center p-4 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div id="successCard" class="bg-white rounded-2xl p-5 max-w-xs w-full shadow-2xl text-center border-4 border-emerald-400">
+      <div id="successIconWrap" class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center text-xl mx-auto mb-1">
+        <i id="successIcon" class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-header font-bold text-lg text-slate-800">RICHTIG!</h3>
+      <div id="successVerbDisplay" class="font-bold text-lg text-indigo-600 my-1">
+        ---
+      </div>
+      <div id="successBlitz" class="hidden mt-1 font-header font-bold text-amber-500 text-2xl blitz-pop"><i class="fa-solid fa-bolt"></i> BLITZ! <i class="fa-solid fa-bolt"></i></div>
+    </div>
+  </div>
+
+  <div id="feedbackModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-2xl p-5 max-w-xs w-full shadow-2xl text-center border-4 border-rose-300">
+      <div class="w-10 h-10 rounded-full flex items-center justify-center text-xl mx-auto mb-2 bg-rose-100 text-rose-500">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+      <h3 id="modalTitle" class="font-header font-bold text-lg text-slate-800 mb-1">Leider falsch!</h3>
+      <p id="modalBody" class="text-slate-600 text-xs mb-4 leading-relaxed">
+        ---
+      </p>
+      <button onclick="closeModal()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 rounded-xl text-xs font-header tracking-wider transition">
+        WEITER
+      </button>
+    </div>
+  </div>
+
+  <div id="levelCompleteModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-2xl p-5 max-w-xs w-full shadow-2xl text-center border-4 border-amber-300">
+      <div class="w-12 h-12 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-2">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <h3 id="modalTitleLevel" class="font-header font-bold text-lg text-slate-800">LEVEL ABGESCHLOSSEN!</h3>
+      <p id="modalStarsLabel" class="text-slate-500 text-[10px] my-1">Sterne für diesen Durchgang:</p>
+      
+      <div id="modalStarsEarned" class="text-amber-400 text-2xl flex justify-center gap-1 my-2"></div>
+
+      <p id="modalFirstTry" class="text-[12px] font-bold text-slate-600 mb-0.5">---</p>
+      <p id="modalBlitz" class="text-[12px] font-bold text-amber-500 mb-0.5">---</p>
+      <p id="modalErrorSummary" class="text-[11px] font-bold text-slate-400 mb-1">0 Fehler gemacht</p>
+      <p id="modalLevelTotal" class="text-[12px] font-bold text-amber-600 mb-4">---</p>
+
+      <button id="modalContinueBtn" onclick="afterLevelComplete()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl text-xs font-header tracking-wider transition">
+        ZURÜCK ZUM MENÜ
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const VERB_DATA = [
+      // 1. Unchanging
+      { id: 'cut', base: 'cut', past: 'cut', part: 'cut', deBase: 'schneiden', de1: 'ich schneide', de2: 'ich schnitt', de3: 'ich habe geschnitten', cat: 'unchanging' },
+      { id: 'hit', base: 'hit', past: 'hit', part: 'hit', deBase: 'schlagen', de1: 'ich schlage', de2: 'ich schlug', de3: 'ich habe geschlagen', cat: 'unchanging' },
+      { id: 'put', base: 'put', past: 'put', part: 'put', deBase: 'legen/stellen', de1: 'ich lege', de2: 'ich legte', de3: 'ich habe gelegt', cat: 'unchanging' },
+      { id: 'cost', base: 'cost', past: 'cost', part: 'cost', deBase: 'kosten', de1: 'es kostet', de2: 'es kostete', de3: 'es hat gekostet', cat: 'unchanging' },
+      { id: 'hurt', base: 'hurt', past: 'hurt', part: 'hurt', deBase: 'verletzen', de1: 'ich verletze', de2: 'ich verletzte', de3: 'ich habe verletzt', cat: 'unchanging' },
+      { id: 'let', base: 'let', past: 'let', part: 'let', deBase: 'lassen', de1: 'ich lasse', de2: 'ich liess', de3: 'ich habe gelassen', cat: 'unchanging' },
+
+      // 2. Flyers
+      { id: 'blow', base: 'blow', past: 'blew', part: 'blown', deBase: 'blasen', de1: 'ich blase', de2: 'ich blies', de3: 'ich habe geblasen', cat: 'flyers' },
+      { id: 'draw', base: 'draw', past: 'drew', part: 'drawn', deBase: 'zeichnen', de1: 'ich zeichne', de2: 'ich zeichnete', de3: 'ich habe gezeichnet', cat: 'flyers' },
+      { id: 'fly', base: 'fly', past: 'flew', part: 'flown', deBase: 'fliegen', de1: 'ich fliege', de2: 'ich flog', de3: 'ich bin geflogen', cat: 'flyers' },
+      { id: 'grow', base: 'grow', past: 'grew', part: 'grown', deBase: 'wachsen', de1: 'ich wachse', de2: 'ich wuchs', de3: 'ich bin gewachsen', cat: 'flyers' },
+      { id: 'know', base: 'know', past: 'knew', part: 'known', deBase: 'wissen', de1: 'ich weiss', de2: 'ich wusste', de3: 'ich habe gewusst', cat: 'flyers' },
+      { id: 'throw', base: 'throw', past: 'threw', part: 'thrown', deBase: 'werfen', de1: 'ich werfe', de2: 'ich warf', de3: 'ich habe geworfen', cat: 'flyers' },
+
+      // 3. Vowel Shift
+      { id: 'begin', base: 'begin', past: 'began', part: 'begun', deBase: 'beginnen', de1: 'ich beginne', de2: 'ich begann', de3: 'ich habe begonnen', cat: 'vowel' },
+      { id: 'drink', base: 'drink', past: 'drank', part: 'drunk', deBase: 'trinken', de1: 'ich trinke', de2: 'ich trank', de3: 'ich habe getrunken', cat: 'vowel' },
+      { id: 'ring', base: 'ring', past: 'rang', part: 'rung', deBase: 'klingeln', de1: 'es klingelt', de2: 'es klingelte', de3: 'es hat geklingelt', cat: 'vowel' },
+      { id: 'sing', base: 'sing', past: 'sang', part: 'sung', deBase: 'singen', de1: 'ich singe', de2: 'ich sang', de3: 'ich habe gesungen', cat: 'vowel' },
+      { id: 'swim', base: 'swim', past: 'swam', part: 'swum', deBase: 'schwimmen', de1: 'ich schwimme', de2: 'ich schwamm', de3: 'ich bin geschwommen', cat: 'vowel' },
+
+      // 4. Enders
+      { id: 'bite', base: 'bite', past: 'bit', part: 'bitten', deBase: 'beissen', de1: 'ich beisse', de2: 'ich biss', de3: 'ich habe gebissen', cat: 'enders' },
+      { id: 'break', base: 'break', past: 'broke', part: 'broken', deBase: 'brechen', de1: 'ich breche', de2: 'ich brach', de3: 'ich habe gebrochen', cat: 'enders' },
+      { id: 'choose', base: 'choose', past: 'chose', part: 'chosen', deBase: 'wählen', de1: 'ich wähle', de2: 'ich wählte', de3: 'ich habe gewählt', cat: 'enders' },
+      { id: 'drive', base: 'drive', past: 'drove', part: 'driven', deBase: 'fahren', de1: 'ich fahre', de2: 'ich fuhr', de3: 'ich bin gefahren', cat: 'enders' },
+      { id: 'eat', base: 'eat', past: 'ate', part: 'eaten', deBase: 'essen', de1: 'ich esse', de2: 'ich ass', de3: 'ich habe gegessen', cat: 'enders' },
+      { id: 'give', base: 'give', past: 'gave', part: 'given', deBase: 'geben', de1: 'ich gebe', de2: 'ich gab', de3: 'ich habe gegeben', cat: 'enders' },
+      { id: 'write', base: 'write', past: 'wrote', part: 'written', deBase: 'schreiben', de1: 'ich schreibe', de2: 'ich schrieb', de3: 'ich habe geschrieben', cat: 'enders' },
+
+      // 5. Truly Unique
+      { id: 'be', base: 'be', past: 'was/were', part: 'been', deBase: 'sein', de1: 'ich bin', de2: 'ich war', de3: 'ich bin gewesen', cat: 'unique' },
+      { id: 'do', base: 'do', past: 'did', part: 'done', deBase: 'tun/machen', de1: 'ich tue', de2: 'ich tat', de3: 'ich habe getan', cat: 'unique' },
+      { id: 'go', base: 'go', past: 'went', part: 'gone', deBase: 'gehen', de1: 'ich gehe', de2: 'ich ging', de3: 'ich bin gegangen', cat: 'unique' },
+
+      // 6. t & d Transformers
+      { id: 'build', base: 'build', past: 'built', part: 'built', deBase: 'bauen', de1: 'ich baue', de2: 'ich baute', de3: 'ich habe gebaut', cat: 'td', sub: 'A' },
+      { id: 'feel', base: 'feel', past: 'felt', part: 'felt', deBase: 'fühlen', de1: 'ich fühle', de2: 'ich fühlte', de3: 'ich habe gefühlt', cat: 'td', sub: 'A' },
+      { id: 'keep', base: 'keep', past: 'kept', part: 'kept', deBase: 'behalten', de1: 'ich behalte', de2: 'ich behielt', de3: 'ich habe behalten', cat: 'td', sub: 'A' },
+      { id: 'leave', base: 'leave', past: 'left', part: 'left', deBase: 'verlassen', de1: 'ich verlasse', de2: 'ich verliess', de3: 'ich habe verlassen', cat: 'td', sub: 'A' },
+      { id: 'sleep', base: 'sleep', past: 'slept', part: 'slept', deBase: 'schlafen', de1: 'ich schlafe', de2: 'ich schlief', de3: 'ich habe geschlafen', cat: 'td', sub: 'A' },
+      { id: 'sell', base: 'sell', past: 'sold', part: 'sold', deBase: 'verkaufen', de1: 'ich verkaufe', de2: 'ich verkaufte', de3: 'ich habe verkauft', cat: 'td', sub: 'B' },
+      { id: 'tell', base: 'tell', past: 'told', part: 'told', deBase: 'erzählen', de1: 'ich erzähle', de2: 'ich erzählte', de3: 'ich habe erzählt', cat: 'td', sub: 'B' },
+      { id: 'make', base: 'make', past: 'made', part: 'made', deBase: 'machen', de1: 'ich mache', de2: 'ich machte', de3: 'ich habe gemacht', cat: 'td', sub: 'B' },
+      { id: 'pay', base: 'pay', past: 'paid', part: 'paid', deBase: 'bezahlen', de1: 'ich bezahle', de2: 'ich bezahlte', de3: 'ich habe bezahlt', cat: 'td', sub: 'B' },
+
+      // 7. Ought / Aught
+      { id: 'bring', base: 'bring', past: 'brought', part: 'brought', deBase: 'bringen', de1: 'ich bringe', de2: 'ich brachte', de3: 'ich habe gebracht', cat: 'ought' },
+      { id: 'buy', base: 'buy', past: 'bought', part: 'bought', deBase: 'kaufen', de1: 'ich kaufe', de2: 'ich kaufte', de3: 'ich habe gekauft', cat: 'ought' },
+      { id: 'think', base: 'think', past: 'thought', part: 'thought', deBase: 'denken', de1: 'ich denke', de2: 'ich dachte', de3: 'ich habe gedacht', cat: 'ought' },
+      { id: 'catch', base: 'catch', past: 'caught', part: 'caught', deBase: 'fangen', de1: 'ich fange', de2: 'ich fing', de3: 'ich habe gefangen', cat: 'ought' },
+
+      // 8. Boomerangs
+      { id: 'become', base: 'become', past: 'became', part: 'become', deBase: 'werden', de1: 'ich werde', de2: 'ich wurde', de3: 'ich bin geworden', cat: 'boomerangs' },
+      { id: 'come', base: 'come', past: 'came', part: 'come', deBase: 'kommen', de1: 'ich komme', de2: 'ich kam', de3: 'ich bin gekommen', cat: 'boomerangs' },
+      { id: 'run', base: 'run', past: 'ran', part: 'run', deBase: 'rennen', de1: 'ich renne', de2: 'ich rannte', de3: 'ich bin gerannt', cat: 'boomerangs' }
+    ];
+
+    // Lückensätze: [Verb-ID, Form (base/past/part), englischer Satz, wörtliche deutsche Übersetzung (gesuchtes Verb in <b>), Lösung]
+    const GAP_RAW = [
+      ['cut','base',"I always _____ the bread with a sharp knife.","Ich <b>schneide</b> das Brot immer mit einem scharfen Messer.","cut"],
+      ['cut','past',"Yesterday she _____ her finger.","Gestern <b>schnitt</b> sie sich in den Finger.","cut"],
+      ['cut','part',"He has _____ the paper into small pieces.","Er hat das Papier in kleine Stücke <b>geschnitten</b>.","cut"],
+
+      ['hit','base',"Good players _____ the ball hard.","Gute Spieler <b>schlagen</b> den Ball hart.","hit"],
+      ['hit','past',"Last week he _____ the ball over the fence.","Letzte Woche <b>schlug</b> er den Ball über den Zaun.","hit"],
+      ['hit','part',"She has never _____ anyone.","Sie hat noch nie jemanden <b>geschlagen</b>.","hit"],
+
+      ['put','base',"We _____ the books on the shelf.","Wir <b>stellen</b> die Bücher ins Regal.","put"],
+      ['put','past',"He _____ his keys on the table.","Er <b>legte</b> seine Schlüssel auf den Tisch.","put"],
+      ['put','part',"I have _____ the milk in the fridge.","Ich habe die Milch in den Kühlschrank <b>gestellt</b>.","put"],
+
+      ['cost','base',"These shoes _____ too much money.","Diese Schuhe <b>kosten</b> zu viel Geld.","cost"],
+      ['cost','past',"The ticket _____ ten francs yesterday.","Das Ticket <b>kostete</b> gestern zehn Franken.","cost"],
+      ['cost','part',"The trip has _____ us a lot of money.","Die Reise hat uns viel Geld <b>gekostet</b>.","cost"],
+
+      ['hurt','base',"Sharp stones _____ your feet.","Scharfe Steine <b>verletzen</b> deine Füsse.","hurt"],
+      ['hurt','past',"He fell and _____ his knee.","Er stürzte und <b>verletzte</b> sich das Knie.","hurt"],
+      ['hurt','part',"She has _____ her arm in the game.","Sie hat sich beim Spiel den Arm <b>verletzt</b>.","hurt"],
+
+      ['let','base',"My parents _____ me watch TV on Sundays.","Meine Eltern <b>lassen</b> mich sonntags fernsehen.","let"],
+      ['let','past',"The teacher _____ us go home early.","Der Lehrer <b>liess</b> uns früh nach Hause gehen.","let"],
+      ['let','part',"I have _____ the dog go outside.","Ich habe den Hund nach draussen <b>gelassen</b>.","let"],
+
+      ['blow','base',"Strong winds _____ the leaves away.","Starke Winde <b>blasen</b> die Blätter weg.","blow"],
+      ['blow','past',"He _____ out all the candles.","Er <b>blies</b> alle Kerzen aus.","blew"],
+      ['blow','part',"She has _____ up twenty balloons.","Sie hat zwanzig Ballons <b>aufgeblasen</b>.","blown"],
+
+      ['draw','base',"I _____ a picture every Friday.","Ich <b>zeichne</b> jeden Freitag ein Bild.","draw"],
+      ['draw','past',"She _____ a beautiful horse.","Sie <b>zeichnete</b> ein schönes Pferd.","drew"],
+      ['draw','part',"He has _____ a map of the town.","Er hat eine Karte der Stadt <b>gezeichnet</b>.","drawn"],
+
+      ['fly','base',"Birds _____ south in winter.","Vögel <b>fliegen</b> im Winter nach Süden.","fly"],
+      ['fly','past',"We _____ to Spain last summer.","Wir <b>flogen</b> letzten Sommer nach Spanien.","flew"],
+      ['fly','part',"She has _____ in a helicopter.","Sie ist schon mit einem Helikopter <b>geflogen</b>.","flown"],
+
+      ['grow','base',"Tomatoes _____ well in the sun.","Tomaten <b>wachsen</b> gut in der Sonne.","grow"],
+      ['grow','past',"The tree _____ very fast last year.","Der Baum <b>wuchs</b> letztes Jahr sehr schnell.","grew"],
+      ['grow','part',"My brother has _____ ten centimetres.","Mein Bruder ist zehn Zentimeter <b>gewachsen</b>.","grown"],
+
+      ['know','base',"We _____ the answer.","Wir <b>wissen</b> die Antwort.","know"],
+      ['know','past',"Yesterday I _____ the right answer.","Gestern <b>wusste</b> ich die richtige Antwort.","knew"],
+      ['know','part',"I have _____ it all the time.","Ich habe es die ganze Zeit <b>gewusst</b>.","known"],
+
+      ['throw','base',"Children _____ stones into the lake.","Kinder <b>werfen</b> Steine in den See.","throw"],
+      ['throw','past',"He _____ the ball to his dog.","Er <b>warf</b> den Ball zu seinem Hund.","threw"],
+      ['throw','part',"She has _____ away the old shoes.","Sie hat die alten Schuhe <b>weggeworfen</b>.","thrown"],
+
+      ['begin','base',"The lessons _____ at eight o'clock.","Die Stunden <b>beginnen</b> um acht Uhr.","begin"],
+      ['begin','past',"The film _____ ten minutes ago.","Der Film <b>begann</b> vor zehn Minuten.","began"],
+      ['begin','part',"The game has already _____.","Das Spiel hat schon <b>begonnen</b>.","begun"],
+
+      ['drink','base',"We _____ a lot of water in summer.","Wir <b>trinken</b> im Sommer viel Wasser.","drink"],
+      ['drink','past',"He _____ a glass of milk this morning.","Er <b>trank</b> heute Morgen ein Glas Milch.","drank"],
+      ['drink','part',"I have never _____ coffee.","Ich habe noch nie Kaffee <b>getrunken</b>.","drunk"],
+
+      ['ring','base',"The phones _____ all day.","Die Telefone <b>klingeln</b> den ganzen Tag.","ring"],
+      ['ring','past',"The doorbell _____ at midnight.","Die Türklingel <b>klingelte</b> um Mitternacht.","rang"],
+      ['ring','part',"The phone has _____ three times.","Das Telefon hat dreimal <b>geklingelt</b>.","rung"],
+
+      ['sing','base',"They _____ in the school choir.","Sie <b>singen</b> im Schulchor.","sing"],
+      ['sing','past',"She _____ a beautiful song.","Sie <b>sang</b> ein schönes Lied.","sang"],
+      ['sing','part',"We have _____ this song many times.","Wir haben dieses Lied oft <b>gesungen</b>.","sung"],
+
+      ['swim','base',"We _____ in the lake every summer.","Wir <b>schwimmen</b> jeden Sommer im See.","swim"],
+      ['swim','past',"He _____ across the river.","Er <b>schwamm</b> über den Fluss.","swam"],
+      ['swim','part',"I have _____ two hundred metres today.","Ich bin heute zweihundert Meter <b>geschwommen</b>.","swum"],
+
+      ['bite','base',"Some dogs _____ when they are scared.","Manche Hunde <b>beissen</b>, wenn sie Angst haben.","bite"],
+      ['bite','past',"The dog _____ the postman.","Der Hund <b>biss</b> den Briefträger.","bit"],
+      ['bite','part',"A mosquito has _____ me.","Eine Mücke hat mich <b>gebissen</b>.","bitten"],
+
+      ['break','base',"Careful! Glasses _____ easily.","Vorsicht! Gläser <b>brechen</b> leicht.","break"],
+      ['break','past',"He _____ his leg last winter.","Er <b>brach</b> sich letzten Winter das Bein.","broke"],
+      ['break','part',"He has _____ his arm.","Er hat sich den Arm <b>gebrochen</b>.","broken"],
+
+      ['choose','base',"Every year the students _____ a new book.","Jedes Jahr <b>wählen</b> die Schüler ein neues Buch.","choose"],
+      ['choose','past',"She _____ the red dress.","Sie <b>wählte</b> das rote Kleid.","chose"],
+      ['choose','part',"We have _____ a name for our band.","Wir haben einen Namen für unsere Band <b>gewählt</b>.","chosen"],
+
+      ['drive','base',"My parents _____ to work by car.","Meine Eltern <b>fahren</b> mit dem Auto zur Arbeit.","drive"],
+      ['drive','past',"He _____ very fast on the motorway.","Er <b>fuhr</b> auf der Autobahn sehr schnell.","drove"],
+      ['drive','part',"I have never _____ a truck.","Ich bin noch nie einen Lastwagen <b>gefahren</b>.","driven"],
+
+      ['eat','base',"We _____ pizza on Fridays.","Wir <b>essen</b> freitags Pizza.","eat"],
+      ['eat','past',"She _____ a big salad for lunch.","Sie <b>ass</b> zum Mittagessen einen grossen Salat.","ate"],
+      ['eat','part',"I have already _____ three apples.","Ich habe schon drei Äpfel <b>gegessen</b>.","eaten"],
+
+      ['give','base',"Teachers _____ homework every day.","Lehrer <b>geben</b> jeden Tag Hausaufgaben.","give"],
+      ['give','past',"He _____ me a nice present.","Er <b>gab</b> mir ein schönes Geschenk.","gave"],
+      ['give','part',"She has _____ her book to her friend.","Sie hat ihrer Freundin ihr Buch <b>gegeben</b>.","given"],
+
+      ['write','base',"I _____ a letter to my grandma every month.","Ich <b>schreibe</b> jeden Monat einen Brief an meine Oma.","write"],
+      ['write','past',"He _____ a long email yesterday.","Er <b>schrieb</b> gestern eine lange E-Mail.","wrote"],
+      ['write','part',"She has _____ three books.","Sie hat drei Bücher <b>geschrieben</b>.","written"],
+
+      ['be','base',"I want to _____ a pilot one day.","Ich will eines Tages Pilot <b>sein</b>.","be"],
+      ['be','past',"He _____ at home yesterday.","Er <b>war</b> gestern zu Hause.","was"],
+      ['be','part',"We have _____ friends for years.","Wir sind seit Jahren Freunde <b>gewesen</b>.","been"],
+
+      ['do','base',"We _____ our homework after school.","Wir <b>machen</b> nach der Schule unsere Hausaufgaben.","do"],
+      ['do','past',"He _____ his best at the test.","Er <b>tat</b> bei der Prüfung sein Bestes.","did"],
+      ['do','part',"I have _____ all my homework.","Ich habe alle meine Hausaufgaben <b>gemacht</b>.","done"],
+
+      ['go','base',"We _____ to the cinema every Friday.","Wir <b>gehen</b> jeden Freitag ins Kino.","go"],
+      ['go','past',"They _____ to the park yesterday.","Sie <b>gingen</b> gestern in den Park.","went"],
+      ['go','part',"She has _____ home already.","Sie ist schon nach Hause <b>gegangen</b>.","gone"],
+
+      ['build','base',"Many people _____ houses with wood.","Viele Leute <b>bauen</b> Häuser aus Holz.","build"],
+      ['build','past',"They _____ a snowman yesterday.","Sie <b>bauten</b> gestern einen Schneemann.","built"],
+      ['build','part',"He has _____ a tree house.","Er hat ein Baumhaus <b>gebaut</b>.","built"],
+
+      ['feel','base',"I _____ happy today.","Ich <b>fühle</b> mich heute glücklich.","feel"],
+      ['feel','past',"She _____ very tired after the game.","Sie <b>fühlte</b> sich nach dem Spiel sehr müde.","felt"],
+      ['feel','part',"I have _____ sick since Monday.","Ich habe mich seit Montag krank <b>gefühlt</b>.","felt"],
+
+      ['keep','base',"We _____ all our old letters.","Wir <b>behalten</b> alle unsere alten Briefe.","keep"],
+      ['keep','past',"She _____ the secret for years.","Sie <b>behielt</b> das Geheimnis jahrelang für sich.","kept"],
+      ['keep','part',"I have _____ all her letters.","Ich habe alle ihre Briefe <b>behalten</b>.","kept"],
+
+      ['leave','base',"We _____ the house at eight every morning.","Wir <b>verlassen</b> jeden Morgen um acht das Haus.","leave"],
+      ['leave','past',"He _____ the room without a word.","Er <b>verliess</b> den Raum ohne ein Wort.","left"],
+      ['leave','part',"They have _____ the city.","Sie haben die Stadt <b>verlassen</b>.","left"],
+
+      ['sleep','base',"Babies _____ a lot.","Babys <b>schlafen</b> viel.","sleep"],
+      ['sleep','past',"I _____ very badly last night.","Ich <b>schlief</b> letzte Nacht sehr schlecht.","slept"],
+      ['sleep','part',"He has _____ for ten hours.","Er hat zehn Stunden <b>geschlafen</b>.","slept"],
+
+      ['sell','base',"They _____ fresh bread in this shop.","Sie <b>verkaufen</b> in diesem Laden frisches Brot.","sell"],
+      ['sell','past',"He _____ his old bike last week.","Er <b>verkaufte</b> letzte Woche sein altes Fahrrad.","sold"],
+      ['sell','part',"We have _____ all the tickets.","Wir haben alle Tickets <b>verkauft</b>.","sold"],
+
+      ['tell','base',"Grandpa and I _____ funny stories.","Opa und ich <b>erzählen</b> lustige Geschichten.","tell"],
+      ['tell','past',"She _____ a funny story.","Sie <b>erzählte</b> eine lustige Geschichte.","told"],
+      ['tell','part',"He has _____ me a secret.","Er hat mir ein Geheimnis <b>erzählt</b>.","told"],
+
+      ['make','base',"We _____ pizza every Saturday.","Wir <b>machen</b> jeden Samstag Pizza.","make"],
+      ['make','past',"She _____ a cake yesterday.","Sie <b>machte</b> gestern einen Kuchen.","made"],
+      ['make','part',"I have _____ a mistake.","Ich habe einen Fehler <b>gemacht</b>.","made"],
+
+      ['pay','base',"We _____ by card.","Wir <b>bezahlen</b> mit Karte.","pay"],
+      ['pay','past',"He _____ twenty francs for the book.","Er <b>bezahlte</b> zwanzig Franken für das Buch.","paid"],
+      ['pay','part',"I have already _____ the bill.","Ich habe die Rechnung schon <b>bezahlt</b>.","paid"],
+
+      ['bring','base',"We _____ our lunch to school.","Wir <b>bringen</b> unser Mittagessen in die Schule.","bring"],
+      ['bring','past',"He _____ me a glass of water.","Er <b>brachte</b> mir ein Glas Wasser.","brought"],
+      ['bring','part',"She has _____ her friend to the party.","Sie hat ihre Freundin zur Party <b>gebracht</b>.","brought"],
+
+      ['buy','base',"We _____ fresh bread every morning.","Wir <b>kaufen</b> jeden Morgen frisches Brot.","buy"],
+      ['buy','past',"I _____ a new jacket yesterday.","Ich <b>kaufte</b> gestern eine neue Jacke.","bought"],
+      ['buy','part',"She has _____ a new phone.","Sie hat ein neues Handy <b>gekauft</b>.","bought"],
+
+      ['think','base',"I _____ it is a good idea.","Ich <b>denke</b>, es ist eine gute Idee.","think"],
+      ['think','past',"I _____ about you yesterday.","Ich <b>dachte</b> gestern an dich.","thought"],
+      ['think','part',"I have _____ of you all night.","Ich habe die ganze Nacht an dich <b>gedacht</b>.","thought"],
+
+      ['catch','base',"Cats _____ mice.","Katzen <b>fangen</b> Mäuse.","catch"],
+      ['catch','past',"He _____ the ball with one hand.","Er <b>fing</b> den Ball mit einer Hand.","caught"],
+      ['catch','part',"She has _____ a big fish.","Sie hat einen grossen Fisch <b>gefangen</b>.","caught"],
+
+      ['become','base',"Caterpillars _____ butterflies.","Raupen <b>werden</b> zu Schmetterlingen.","become"],
+      ['become','past',"He _____ a famous singer.","Er <b>wurde</b> ein berühmter Sänger.","became"],
+      ['become','part',"She has _____ a teacher.","Sie ist Lehrerin <b>geworden</b>.","become"],
+
+      ['come','base',"My friends _____ to my party.","Meine Freunde <b>kommen</b> zu meiner Party.","come"],
+      ['come','past',"He _____ home late last night.","Er <b>kam</b> gestern Nacht spät nach Hause.","came"],
+      ['come','part',"They have _____ by train.","Sie sind mit dem Zug <b>gekommen</b>.","come"],
+
+      ['run','base',"We _____ in the park every morning.","Wir <b>rennen</b> jeden Morgen im Park.","run"],
+      ['run','past',"She _____ to the bus stop.","Sie <b>rannte</b> zur Bushaltestelle.","ran"],
+      ['run','part',"I have _____ five kilometres.","Ich bin fünf Kilometer <b>gerannt</b>.","run"]
+    ];
+
+    const LUECKEN_DATA = GAP_RAW.map(r => ({ verb: r[0], form: r[1], sentence: r[2], de: r[3], answer: r[4] }));
+
+    const CATEGORIES = {
+      'unchanging': { title: 'THE UNCHANGING ONES', sub: '(Base = Past = Participle)', badge: 'cubes' },
+      'flyers': { title: "THE 'ew' - 'own' FLYERS", sub: '(Base + w -> ew -> own)', badge: 'flyers' },
+      'vowel': { title: 'THE i-a-u VOWEL SHIFT', sub: '(i -> a -> u)', badge: 'vowel' },
+      'enders': { title: "THE '-en' ENDERS", sub: '(Participle ends in -en/-n)', badge: 'enders' },
+      'unique': { title: 'THE TRULY UNIQUE', sub: '(No Common Pattern)', badge: 'puzzle' },
+      'td': { title: "THE 't' & 'd' TRANSFORMERS", sub: '(Past & Participle same)', badge: 'td' },
+      'ought': { title: "'-ought' / '-aught' SPELLERS", sub: '(bring, buy, think, catch)', badge: 'lightbulb' },
+      'boomerangs': { title: 'THE BOOMERANGS', sub: '(Base = Past Participle)', badge: 'boomerang' }
+    };
+
+    // Level-Zuordnung: 1 = Übersetzungs-Suche, 2 = Drag & Drop, 3 = Form-Suche, 4 = Selber schreiben,
+    // 5 = Lückentext, 6 = Lern-Radar & Schwächen-Training
+    const WORDS_PER_RUN = 10;
+    const MAX_STARS_PER_LEVEL = 20;
+    const STORAGE_KEY = 'irregularVerbsStarsV3';
+    const OLD_STORAGE_KEY = 'irregularVerbsStarsV2';
+    // Blitz-Antwort: richtig beim ersten Versuch innerhalb dieser Sekunden (je Abfrageart)
+    const BLITZ_SECONDS = { 1: 6, 2: 6, 3: 6, 4: 10, 5: 10 };
+
+    let currentLevel = 1;
+    let ttsEnabled = true;
+    let queue = [];
+    let errorsCount = 0;
+    let firstTryCorrect = 0;
+    let currentItem = null;
+    let selectedTouchWord = null;
+    let levelStars = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+    // Laufende Runde / Pausen
+    let blitzCount = 0;
+    let lastWasBlitz = false;
+    let runActive = false;      // läuft gerade eine Runde (Level 1-5 oder Training)?
+    let answerOpen = false;     // wartet das aktuelle Wort auf eine Antwort?
+    let successTimeout = null;
+    let pausedRuns = {};        // pausierte Runden pro Level (nur im Speicher)
+
+    // Level-Logik: currentLevel = 1..6 (Menüpunkt), currentMode = aktuelle Abfrageart (1..5) oder 'overview'
+    let currentMode = 1;
+    let runTotal = 10;
+
+    // Wort-Stufen: -2, -1 (rot), 0 (schwarz), +1, +2 (grün)
+    const WORD_STORAGE_KEY = 'irregularVerbsWordLevelsV1';
+    let wordLevels = {};
+
+    // 18 seconds Timer
+    let timerInterval = null;
+    const MAX_TIME = 18;
+    let timeLeft = MAX_TIME;
+
+    // iPad Touch Drag State
+    let touchGhostEl = null;
+
+    const homeBtn = document.getElementById('homeBtn');
+    const menuScreen = document.getElementById('menuScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    const ttsToggleBtn = document.getElementById('ttsToggleBtn');
+    const ttsIcon = document.getElementById('ttsIcon');
+    const totalStarsCount = document.getElementById('totalStarsCount');
+    const queueProgressText = document.getElementById('queueProgressText');
+    const timerBar = document.getElementById('timerBar');
+    const errorCounter = document.getElementById('errorCounter');
+    const blitzCounter = document.getElementById('blitzCounter');
+    const levelBadge = document.getElementById('levelBadge');
+    const promptDisplay = document.getElementById('promptDisplay');
+
+    function loadStars() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          for (let l = 1; l <= 5; l++) {
+            const v = Number(parsed[l]);
+            if (!isNaN(v)) levelStars[l] = Math.max(0, Math.min(MAX_STARS_PER_LEVEL, v));
+          }
+        } else {
+          // Migration: alter Stand hatte 4 Level; das alte Level 4 (Lückentext) ist jetzt Level 5
+          const old = localStorage.getItem(OLD_STORAGE_KEY);
+          if (old) {
+            const p = JSON.parse(old);
+            const clamp = v => Math.max(0, Math.min(MAX_STARS_PER_LEVEL, Number(v) || 0));
+            levelStars = { 1: clamp(p[1]), 2: clamp(p[2]), 3: clamp(p[3]), 4: 0, 5: clamp(p[4]) };
+            saveStars();
+          }
+        }
+      } catch (e) { /* Speicher nicht verfügbar */ }
+    }
+
+    function saveStars() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(levelStars)); } catch (e) { /* ignorieren */ }
+    }
+
+    window.onload = function() {
+      loadStars();
+      loadWordLevels();
+      setupEventListeners();
+      setupTouchDragEvents();
+      renderStarsMenu();
+    };
+
+    function setupEventListeners() {
+      homeBtn.addEventListener('click', handleHome);
+      ttsToggleBtn.addEventListener('click', toggleTTS);
+
+      const dragWord = document.getElementById('draggableWord');
+      dragWord.addEventListener('dragstart', handleDragStart);
+      dragWord.addEventListener('click', () => {
+        selectedTouchWord = currentItem;
+        dragWord.classList.add('ring-2', 'ring-indigo-300');
+      });
+
+      document.getElementById('lueckenInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkGapAnswer();
+      });
+      document.getElementById('typeInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkTypeAnswer();
+      });
+    }
+
+    /* iPad Native Touch Drag Support (Level 2) */
+    function setupTouchDragEvents() {
+      const dragWord = document.getElementById('draggableWord');
+
+      dragWord.addEventListener('touchstart', function(e) {
+        if (currentMode !== 2 || !currentItem) return;
+        const touch = e.touches[0];
+        
+        touchGhostEl = dragWord.cloneNode(true);
+        touchGhostEl.classList.add('touch-drag-ghost');
+        document.body.appendChild(touchGhostEl);
+        moveTouchGhost(touch.clientX, touch.clientY);
+      }, { passive: false });
+
+      document.addEventListener('touchmove', function(e) {
+        if (!touchGhostEl) return;
+        e.preventDefault();
+        const touch = e.touches[0];
+        moveTouchGhost(touch.clientX, touch.clientY);
+
+        // Highlight drop zone under touch
+        const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+        const dropZone = targetEl ? targetEl.closest('.drop-zone') : null;
+        
+        document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drop-zone-active'));
+        if (dropZone) dropZone.classList.add('drop-zone-active');
+      }, { passive: false });
+
+      document.addEventListener('touchend', function(e) {
+        if (!touchGhostEl) return;
+        const touch = e.changedTouches[0];
+        const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+        const dropZone = targetEl ? targetEl.closest('.drop-zone') : null;
+
+        if (touchGhostEl) {
+          touchGhostEl.remove();
+          touchGhostEl = null;
+        }
+
+        document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('drop-zone-active'));
+
+        if (dropZone && currentMode === 2) {
+          const targetCat = dropZone.getAttribute('data-cat');
+          validateDrop(targetCat);
+        }
+      });
+    }
+
+    function moveTouchGhost(x, y) {
+      if (touchGhostEl) {
+        touchGhostEl.style.left = `${x}px`;
+        touchGhostEl.style.top = `${y}px`;
+      }
+    }
+
+    function toggleTTS() {
+      ttsEnabled = !ttsEnabled;
+      if (ttsEnabled) {
+        ttsIcon.className = "fa-solid fa-volume-high text-xs sm:text-sm";
+        ttsToggleBtn.classList.remove('opacity-50');
+      } else {
+        ttsIcon.className = "fa-solid fa-volume-xmark text-xs sm:text-sm";
+        ttsToggleBtn.classList.add('opacity-50');
+      }
+    }
+
+    function speak3Forms(item) {
+      if (!ttsEnabled || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(`${item.base}, ${item.past}, ${item.part}`);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function start18sTimer() {
+      stopTimer();
+      timeLeft = MAX_TIME;
+      updateTimerUI();
+
+      timerInterval = setInterval(() => {
+        timeLeft -= 0.1;
+        if (timeLeft <= 0) {
+          stopTimer();
+          handleTimeout();
+        } else {
+          updateTimerUI();
+        }
+      }, 100);
+    }
+
+    function stopTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+    }
+
+    function updateTimerUI() {
+      const pct = Math.max(0, (timeLeft / MAX_TIME) * 100);
+      timerBar.style.width = `${pct}%`;
+
+      if (pct > 50) {
+        timerBar.className = "bg-emerald-500 h-full transition-all";
+      } else if (pct > 25) {
+        timerBar.className = "bg-amber-500 h-full transition-all";
+      } else {
+        timerBar.className = "bg-rose-500 h-full transition-all";
+      }
+    }
+
+    function handleTimeout() {
+      let correctText = "";
+      if (currentMode === 2) {
+        const catObj = CATEGORIES[currentItem.cat];
+        correctText = `Kategorie: <b>${catObj.title}</b> (${currentItem.base} - ${currentItem.past} - ${currentItem.part})`;
+      } else if (currentMode === 1) {
+        correctText = `Richtiges Verb: <b>${currentItem.base}</b> (${currentItem.base} - ${currentItem.past} - ${currentItem.part})`;
+      } else if (currentMode === 3) {
+        const targetForm = currentItem[currentItem.targetFormKey];
+        correctText = `Gesuchte Form: <b>${targetForm}</b> (${currentItem.base} - ${currentItem.past} - ${currentItem.part})`;
+      } else if (currentMode === 4) {
+        const targetForm = currentItem[currentItem.targetFormKey];
+        correctText = `Gesuchte Form: <b>${targetForm}</b> (${currentItem.base} - ${currentItem.past} - ${currentItem.part})`;
+      } else if (currentMode === 5) {
+        correctText = `Richtige Antwort: <b>${currentItem.answer}</b>`;
+      }
+
+      handleWrongAnswer(correctText, "Zeit abgelaufen (18s)!");
+    }
+
+    function pickGapSentences(n) {
+      const shuffled = [...LUECKEN_DATA].sort(() => 0.5 - Math.random());
+      const seen = new Set();
+      const out = [];
+      for (const sObj of shuffled) {
+        if (seen.has(sObj.verb)) continue;
+        seen.add(sObj.verb);
+        out.push(Object.assign({}, sObj, { failed: false }));
+        if (out.length >= n) break;
+      }
+      return out;
+    }
+
+    function startLevel(lvl) {
+      // Pausierte Runde? Dann dort weitermachen.
+      if (pausedRuns[lvl]) { resumeRun(lvl); return; }
+
+      currentLevel = lvl;
+      errorsCount = 0;
+      firstTryCorrect = 0;
+      blitzCount = 0;
+      errorCounter.innerText = "0";
+      blitzCounter.innerText = "0";
+
+      menuScreen.classList.add('hidden');
+      gameScreen.classList.remove('hidden');
+      levelBadge.innerText = `LEVEL ${lvl}`;
+
+      runTotal = WORDS_PER_RUN;
+      runActive = true;
+      setMode(lvl);
+
+      if (lvl >= 1 && lvl <= 4) {
+        const shuffled = [...VERB_DATA].sort(() => 0.5 - Math.random());
+        queue = shuffled.slice(0, WORDS_PER_RUN).map(v => Object.assign({}, v, { failed: false }));
+      } else if (lvl === 5) {
+        queue = pickGapSentences(WORDS_PER_RUN);
+      }
+      nextQueueItem();
+    }
+
+    /* ===== Pause / Fortsetzen ===== */
+    function clearPendingAdvance() {
+      if (successTimeout) { clearTimeout(successTimeout); successTimeout = null; }
+      const overlay = document.getElementById('successOverlay');
+      overlay.classList.remove('opacity-100');
+      overlay.classList.add('opacity-0');
+      document.getElementById('feedbackModal').classList.add('hidden');
+    }
+
+    function pauseRun() {
+      if (!runActive) return;
+      stopTimer();
+      let savedTimeLeft = null;
+      if (answerOpen && currentItem) {
+        // Wort war noch unbeantwortet: zurück an den Anfang der Queue, Timer-Stand merken
+        queue.unshift(currentItem);
+        savedTimeLeft = timeLeft;
+      }
+      clearPendingAdvance();
+      answerOpen = false;
+      runActive = false;
+      pausedRuns[currentLevel] = {
+        queue: queue.slice(),
+        errorsCount, firstTryCorrect, blitzCount, runTotal, savedTimeLeft
+      };
+    }
+
+    function resumeRun(lvl) {
+      const p = pausedRuns[lvl];
+      if (!p) return;
+      delete pausedRuns[lvl];
+
+      currentLevel = lvl;
+      queue = p.queue;
+      errorsCount = p.errorsCount;
+      firstTryCorrect = p.firstTryCorrect;
+      blitzCount = p.blitzCount;
+      runTotal = p.runTotal;
+      errorCounter.innerText = errorsCount;
+      blitzCounter.innerText = blitzCount;
+
+      menuScreen.classList.add('hidden');
+      gameScreen.classList.remove('hidden');
+      levelBadge.innerText = lvl === 6 ? 'TRAINING' : `LEVEL ${lvl}`;
+      runActive = true;
+      if (lvl !== 6) setMode(lvl);
+
+      nextQueueItem();
+      if (p.savedTimeLeft !== null && p.savedTimeLeft !== undefined && runActive && answerOpen) {
+        timeLeft = p.savedTimeLeft;
+        updateTimerUI();
+      }
+    }
+
+    function discardRun(lvl) {
+      delete pausedRuns[lvl];
+      renderStarsMenu();
+    }
+
+    function handleHome() {
+      if (runActive) pauseRun();
+      returnToMenu();
+    }
+
+    function openLevel6() {
+      if (pausedRuns[6]) resumeRun(6);
+      else showOverview();
+    }
+
+    /* ===== Wort-Stufen (Level 6) ===== */
+    function loadWordLevels() {
+      try {
+        const raw = localStorage.getItem(WORD_STORAGE_KEY);
+        if (raw) wordLevels = JSON.parse(raw) || {};
+      } catch (e) { wordLevels = {}; }
+    }
+
+    function saveWordLevels() {
+      try { localStorage.setItem(WORD_STORAGE_KEY, JSON.stringify(wordLevels)); } catch (e) { /* ignorieren */ }
+    }
+
+    function getWL(id) {
+      const v = Number(wordLevels[id]);
+      return isNaN(v) ? 0 : v;
+    }
+
+    // Verb-ID eines Abfrage-Items (Lückentext-Items tragen die ID im Feld "verb")
+    function itemVerbId(item) {
+      return item.sentence ? item.verb : item.id;
+    }
+
+    // Beim ersten Versuch richtig: eine Stufe höher (max. +2)
+    function raiseWordLevel(id) {
+      if (!id) return;
+      wordLevels[id] = Math.min(2, getWL(id) + 1);
+      saveWordLevels();
+    }
+
+    // Beim ersten Versuch falsch: sofort auf -1, war es schon -1 dann -2
+    function dropWordLevel(id) {
+      if (!id) return;
+      wordLevels[id] = getWL(id) >= 0 ? -1 : -2;
+      saveWordLevels();
+    }
+
+    function wordLevelRowHtml(v) {
+      const styles = {
+        '-2': 'background:#fecaca;color:#991b1b;border:1px solid #f87171',
+        '-1': 'background:#fee2e2;color:#dc2626',
+        '0': 'background:rgba(255,255,255,0.9);color:#0f172a',
+        '1': 'background:#dcfce7;color:#16a34a',
+        '2': 'background:#bbf7d0;color:#166534;border:1px solid #4ade80'
+      };
+      return `<div style="${styles[String(getWL(v.id))]}" class="rounded px-1 py-[1px] text-center font-bold text-[9px] sm:text-[10px] leading-none truncate">${v.base} - ${v.past} - ${v.part}</div>`;
+    }
+
+    function weakWords() {
+      return VERB_DATA.filter(v => getWL(v.id) < 0);
+    }
+
+    function renderLevel6Info() {
+      const el = document.getElementById('level6Info');
+      if (!el) return;
+      const weak = weakWords().length;
+      const strong = VERB_DATA.filter(v => getWL(v.id) > 0).length;
+      el.innerHTML = `<span style="color:#dc2626">${weak} zu üben</span> · <span style="color:#16a34a">${strong} sicher</span> · ${VERB_DATA.length} Verben`;
+    }
+
+    function renderResumeBadges() {
+      for (let lvl = 1; lvl <= 6; lvl++) {
+        const el = document.getElementById(`level${lvl}Resume`);
+        if (!el) continue;
+        const p = pausedRuns[lvl];
+        if (p) {
+          el.classList.remove('hidden');
+          el.innerHTML = `<span><i class="fa-solid fa-play"></i> Fortsetzen · noch ${p.queue.length} offen</span>` +
+            `<span class="text-slate-400 underline" onclick="event.stopPropagation(); discardRun(${lvl})"><i class="fa-solid fa-rotate-left"></i> neu starten</span>`;
+        } else {
+          el.classList.add('hidden');
+          el.innerHTML = '';
+        }
+      }
+    }
+
+    /* Layout je nach Abfrageart (1..5) oder 'overview' */
+    function setMode(mode) {
+      currentMode = mode;
+      const showMap = (mode === 1 || mode === 2 || mode === 3 || mode === 'overview');
+      document.getElementById('statusBar').classList.toggle('hidden', mode === 'overview');
+      document.getElementById('overviewHeader').classList.toggle('hidden', mode !== 'overview');
+      document.getElementById('dragHeader').classList.toggle('hidden', mode !== 2);
+      document.getElementById('mindmapCanvas').classList.toggle('hidden', !showMap);
+      document.getElementById('typeUI').classList.toggle('hidden', mode !== 4);
+      document.getElementById('gapUI').classList.toggle('hidden', mode !== 5);
+      if (showMap) renderVisualMindmap();
+    }
+
+    function showOverview() {
+      stopTimer();
+      currentLevel = 6;
+      runActive = false;
+      answerOpen = false;
+      menuScreen.classList.add('hidden');
+      gameScreen.classList.remove('hidden');
+      document.getElementById('levelCompleteModal').classList.add('hidden');
+      setMode('overview');
+
+      const n = Math.min(WORDS_PER_RUN, weakWords().length);
+      const btn = document.getElementById('trainBtn');
+      if (n > 0) {
+        btn.innerHTML = `TRAINIEREN (${n})`;
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      } else {
+        btn.innerHTML = 'ALLES SICHER <i class="fa-solid fa-check"></i>';
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+
+    function buildTrainItem(v) {
+      const modes = [1, 2, 3, 4];
+      const sentences = LUECKEN_DATA.filter(sObj => sObj.verb === v.id);
+      if (sentences.length) modes.push(5);
+      const mode = modes[Math.floor(Math.random() * modes.length)];
+      if (mode === 5) {
+        const sObj = sentences[Math.floor(Math.random() * sentences.length)];
+        return Object.assign({}, sObj, { mode: 5, failed: false });
+      }
+      return Object.assign({}, v, { mode: mode, failed: false });
+    }
+
+    function startTraining() {
+      let weak = weakWords().sort(() => 0.5 - Math.random());
+      if (weak.length === 0) return;
+      // Stufe -2 zuerst, dann -1; max. 10 Wörter
+      weak.sort((a, b) => getWL(a.id) - getWL(b.id));
+      weak = weak.slice(0, WORDS_PER_RUN);
+      queue = weak.map(buildTrainItem).sort(() => 0.5 - Math.random());
+
+      currentLevel = 6;
+      errorsCount = 0;
+      firstTryCorrect = 0;
+      blitzCount = 0;
+      runTotal = queue.length;
+      runActive = true;
+      errorCounter.innerText = "0";
+      blitzCounter.innerText = "0";
+      levelBadge.innerText = 'TRAINING';
+      nextQueueItem();
+    }
+
+    function finishTraining() {
+      runActive = false;
+      delete pausedRuns[6];
+      document.getElementById('modalTitleLevel').innerText = 'TRAINING ABGESCHLOSSEN!';
+      document.getElementById('modalStarsLabel').classList.add('hidden');
+      document.getElementById('modalStarsEarned').innerHTML = '<i class="fa-solid fa-dumbbell text-emerald-500"></i>';
+      document.getElementById('modalFirstTry').innerText = `${firstTryCorrect} von ${runTotal} beim ersten Versuch richtig`;
+      document.getElementById('modalBlitz').innerHTML = `<i class="fa-solid fa-bolt"></i> ${blitzCount} Blitz-Antworten`;
+      document.getElementById('modalErrorSummary').innerText = `${errorsCount} Fehler in diesem Durchgang`;
+      const left = weakWords().length;
+      document.getElementById('modalLevelTotal').innerHTML = left > 0 ? `Noch zu üben: ${left} Wörter` : 'Alle Wörter sitzen! <i class="fa-solid fa-circle-check text-emerald-500"></i>';
+      document.getElementById('modalContinueBtn').innerText = 'ZUR ÜBERSICHT';
+      document.getElementById('levelCompleteModal').classList.remove('hidden');
+      renderStarsMenu();
+    }
+
+    function afterLevelComplete() {
+      document.getElementById('levelCompleteModal').classList.add('hidden');
+      if (currentLevel === 6) showOverview();
+      else returnToMenu();
+    }
+
+    function returnToMenu() {
+      stopTimer();
+      gameScreen.classList.add('hidden');
+      menuScreen.classList.remove('hidden');
+      document.getElementById('levelCompleteModal').classList.add('hidden');
+      renderStarsMenu();
+    }
+
+    /* Re-Queue Logic: 1x next, 1x 3rd next, 1x last */
+    function handleWrongAnswer(correctFeedbackText, title = "Leider falsch!") {
+      stopTimer();
+      answerOpen = false;
+      errorsCount++;
+      errorCounter.innerText = errorsCount;
+
+      if (!currentItem.failed) dropWordLevel(itemVerbId(currentItem));
+      const failedItem = Object.assign({}, currentItem, { failed: true });
+      queue.splice(0, 0, failedItem);
+      const pos2 = Math.min(2, queue.length);
+      queue.splice(pos2, 0, failedItem);
+      queue.push(failedItem);
+
+      showModal(false, title, correctFeedbackText);
+    }
+
+    /* Deutsche Formen mit markierter gesuchter Form (nur das Verbwort, nicht "ich", "ich bin" usw.) */
+    function germanFormsHtml(item, targetKey) {
+      const forms = ['base', 'past', 'part'];
+      return [item.de1, item.de2, item.de3].map((txt, i) => {
+        if (forms[i] !== targetKey) return txt;
+        const words = txt.split(' ');
+        const verbWord = words.pop();
+        const prefix = words.length ? words.join(' ') + ' ' : '';
+        return `${prefix}<span class="target-form">${verbWord}</span>`;
+      }).join(' - ');
+    }
+
+    function nextQueueItem() {
+      if (queue.length === 0) {
+        stopTimer();
+        answerOpen = false;
+        finishLevel();
+        return;
+      }
+
+      currentItem = queue.shift();
+      if (currentLevel === 6) setMode(currentItem.mode);
+      const remaining = queue.length + 1;
+      queueProgressText.innerText = `Rest: ${remaining}`;
+      answerOpen = true;
+
+      if (currentMode === 2) {
+        promptDisplay.innerHTML = "Finde die richtige Gruppe im Mindmap!";
+        const dragWord = document.getElementById('draggableWord');
+        dragWord.innerText = currentItem.base;
+        dragWord.classList.remove('ring-2', 'ring-indigo-300');
+        dragWord.classList.remove('opacity-50');
+        selectedTouchWord = null;
+      } else if (currentMode === 1) {
+        promptDisplay.innerHTML = `Finde die Übersetzung für: <span class="prompt-word">${currentItem.deBase}</span>`;
+      } else if (currentMode === 3 || currentMode === 4) {
+        const forms = ['base', 'past', 'part'];
+        const chosenFormKey = forms[Math.floor(Math.random() * forms.length)];
+        currentItem.targetFormKey = chosenFormKey;
+        const formsHtml = germanFormsHtml(currentItem, chosenFormKey);
+
+        if (currentMode === 3) {
+          promptDisplay.innerHTML = `Klicke auf die gesuchte Form: ${formsHtml}`;
+        } else {
+          promptDisplay.innerHTML = "Schreibe die gesuchte Form selber!";
+          document.getElementById('typePrompt').innerHTML = formsHtml;
+          const ti = document.getElementById('typeInput');
+          ti.value = '';
+          ti.focus();
+        }
+      } else if (currentMode === 5) {
+        promptDisplay.innerHTML = "Setze das richtige Verb ein";
+        document.getElementById('lueckenSentence').innerHTML = currentItem.sentence.replace('_____', `<span class="text-indigo-600 font-bold underline">_____</span>`);
+        document.getElementById('lueckenGerman').innerHTML = currentItem.de.replace('<b>', '<b class="target-form">');
+        document.getElementById('lueckenInput').value = '';
+        document.getElementById('lueckenInput').focus();
+      }
+
+      start18sTimer();
+    }
+
+    function renderVisualMindmap() {
+      Object.keys(CATEGORIES).forEach(catKey => {
+        const zone = document.getElementById(`zone-${catKey}`);
+        if (!zone) return;
+
+        const c = CATEGORIES[catKey];
+        const catVerbs = VERB_DATA.filter(v => v.cat === catKey);
+        let iconSvg = getCategoryBadgeSvg(c.badge);
+
+        let boxHtml = `
+          <div class="flex items-center gap-1.5 border-b border-black/10 pb-0.5">
+            <div class="node-badge text-slate-700">
+              ${iconSvg}
+            </div>
+            <div class="leading-none overflow-hidden">
+              <h4 class="font-header font-bold text-[10px] sm:text-xs uppercase truncate">${c.title}</h4>
+              <div class="text-[8px] sm:text-[9px] opacity-75 truncate">${c.sub}</div>
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col justify-evenly overflow-hidden py-0.5">
+        `;
+
+        if (catKey === 'td') {
+          const subA = catVerbs.filter(v => v.sub === 'A');
+          const subB = catVerbs.filter(v => v.sub === 'B');
+
+          boxHtml += `<div class="text-[8px] font-bold uppercase opacity-75 leading-none">Subgroup A</div>`;
+          subA.forEach(v => { boxHtml += renderVerbRowHtml(v); });
+          
+          boxHtml += `<div class="text-[8px] font-bold uppercase opacity-75 leading-none mt-0.5">Subgroup B</div>`;
+          subB.forEach(v => { boxHtml += renderVerbRowHtml(v); });
+        } else {
+          catVerbs.forEach(v => {
+            boxHtml += renderVerbRowHtml(v);
+          });
+        }
+
+        boxHtml += `</div>`;
+        zone.innerHTML = boxHtml;
+
+        // Clean & Re-attach event listeners
+        zone.removeEventListener('dragover', handleDragOver);
+        zone.removeEventListener('dragleave', handleDragLeave);
+        zone.removeEventListener('drop', handleDrop);
+        zone.removeEventListener('click', handleDropZoneClick);
+
+        zone.addEventListener('dragover', handleDragOver);
+        zone.addEventListener('dragleave', handleDragLeave);
+        zone.addEventListener('drop', handleDrop);
+        zone.addEventListener('click', handleDropZoneClick);
+      });
+    }
+
+    function renderVerbRowHtml(v) {
+      if (currentMode === 'overview') return wordLevelRowHtml(v);
+      if (currentMode === 2) {
+        return `
+          <div class="bg-white/90 rounded px-1 py-[1px] text-center font-bold text-[9px] sm:text-[10px] text-slate-800 leading-none truncate">
+            ${v.base} - ${v.past} - ${v.part}
+          </div>
+        `;
+      } else if (currentMode === 1) {
+        return `
+          <button onclick="checkTranslationAnswer('${v.id}')" class="w-full bg-white/90 hover:bg-white px-1 py-[1px] rounded text-left shadow-2xs transition active:scale-95 border border-slate-200/50 leading-none truncate">
+            <div class="font-bold text-[9px] sm:text-[10px] text-slate-900 truncate">${v.base} - ${v.past} - ${v.part}</div>
+          </button>
+        `;
+      } else if (currentMode === 3) {
+        return `
+          <div class="bg-white/90 px-0.5 py-[1px] rounded shadow-2xs border border-slate-200/50 flex justify-between items-center text-center font-bold text-[8px] sm:text-[9px] leading-none">
+            <button onclick="checkLevel3Answer('${v.id}', 'base')" class="flex-1 bg-slate-100 hover:bg-indigo-100 py-[1px] rounded text-slate-800 active:scale-95 mx-[1px] truncate">${v.base}</button>
+            <button onclick="checkLevel3Answer('${v.id}', 'past')" class="flex-1 bg-slate-100 hover:bg-indigo-100 py-[1px] rounded text-slate-800 active:scale-95 mx-[1px] truncate">${v.past}</button>
+            <button onclick="checkLevel3Answer('${v.id}', 'part')" class="flex-1 bg-slate-100 hover:bg-indigo-100 py-[1px] rounded text-slate-800 active:scale-95 mx-[1px] truncate">${v.part}</button>
+          </div>
+        `;
+      }
+      return '';
+    }
+
+    function getCategoryBadgeSvg(type) {
+      switch(type) {
+        case 'cubes':
+          return `<i class="fa-solid fa-cubes text-sky-600 text-xs"></i>`;
+        case 'flyers':
+          return `<i class="fa-solid fa-feather-pointed text-purple-600 text-xs"></i>`;
+        case 'vowel':
+          return `<span class="font-header font-bold text-[9px] text-orange-600">iau</span>`;
+        case 'enders':
+          return `<i class="fa-solid fa-certificate text-rose-600 text-xs"></i>`;
+        case 'td':
+          return `<i class="fa-solid fa-gears text-emerald-600 text-xs"></i>`;
+        case 'lightbulb':
+          return `<i class="fa-regular fa-lightbulb text-indigo-600 text-xs"></i>`;
+        case 'puzzle':
+          return `<i class="fa-solid fa-puzzle-piece text-teal-600 text-xs"></i>`;
+        case 'boomerang':
+          return `<i class="fa-solid fa-rotate-left text-amber-600 text-xs"></i>`;
+        default:
+          return `<i class="fa-solid fa-star text-slate-600 text-xs"></i>`;
+      }
+    }
+
+    function handleDragStart(e) {
+      e.dataTransfer.setData('text/plain', currentItem.cat);
+      e.target.classList.add('opacity-50');
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      if (currentMode === 2) e.currentTarget.classList.add('drop-zone-active');
+    }
+
+    function handleDragLeave(e) {
+      if (currentMode === 2) e.currentTarget.classList.remove('drop-zone-active');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      if (currentMode !== 2) return;
+      e.currentTarget.classList.remove('drop-zone-active');
+      document.getElementById('draggableWord').classList.remove('opacity-50');
+      
+      const targetCat = e.currentTarget.getAttribute('data-cat');
+      validateDrop(targetCat);
+    }
+
+    function handleDropZoneClick(e) {
+      if (currentMode === 2 && selectedTouchWord) {
+        const targetCat = e.currentTarget.getAttribute('data-cat');
+        validateDrop(targetCat);
+      }
+    }
+
+    /* Wertet eine richtige Antwort: zählt nur, wenn das Wort beim ersten Versuch gelöst wurde.
+       Blitz: beim ersten Versuch richtig UND innerhalb der Blitz-Zeit der Abfrageart. */
+    /* ===== Blitz-Effekte: Ton (Web Audio) + Konfetti (Canvas) ===== */
+    let audioCtx = null;
+    let confettiRAF = null;
+
+    function playBlitzSound() {
+      if (!ttsEnabled) return;
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        if (!audioCtx) audioCtx = new AC();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const t0 = audioCtx.currentTime + 0.02;
+        // aufsteigender Dur-Lauf (E5 G5 C6 E6) + glitzernder Abschluss
+        const notes = [659.25, 783.99, 1046.5, 1318.5, 1760];
+        notes.forEach((f, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const last = i >= 3;
+          const t = t0 + i * 0.075;
+          osc.type = last ? 'sine' : 'triangle';
+          osc.frequency.setValueAtTime(f, t);
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.exponentialRampToValueAtTime(last ? 0.16 : 0.22, t + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + (last ? 0.55 : 0.22));
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + (last ? 0.6 : 0.26));
+        });
+      } catch (e) { /* Ton nicht verfügbar: ignorieren */ }
+    }
+
+    function launchConfetti() {
+      try {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const canvas = document.getElementById('confettiCanvas');
+        if (!canvas || !canvas.getContext) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        if (confettiRAF) cancelAnimationFrame(confettiRAF);
+        const dpr = window.devicePixelRatio || 1;
+        const W = window.innerWidth, H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        canvas.classList.remove('hidden');
+
+        const colors = ['#fbbf24', '#f59e0b', '#fde047', '#34d399', '#60a5fa', '#a78bfa', '#f472b6', '#fb7185'];
+        const parts = [];
+        // Zwei Konfetti-Kanonen unten links und rechts + Burst aus der Mitte
+        const sources = [
+          { x: W * 0.12, y: H * 0.85, a0: -80, a1: -35, n: 55 },
+          { x: W * 0.88, y: H * 0.85, a0: -145, a1: -100, n: 55 },
+          { x: W * 0.5,  y: H * 0.45, a0: -180, a1: 0,    n: 50 }
+        ];
+        sources.forEach(src => {
+          for (let i = 0; i < src.n; i++) {
+            const ang = (src.a0 + Math.random() * (src.a1 - src.a0)) * Math.PI / 180;
+            const speed = 7 + Math.random() * 9;
+            parts.push({
+              x: src.x, y: src.y,
+              vx: Math.cos(ang) * speed, vy: Math.sin(ang) * speed,
+              size: 6 + Math.random() * 7,
+              rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.4,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              round: Math.random() < 0.3,
+              life: 0, max: 95 + Math.random() * 45
+            });
+          }
+        });
+
+        function frame() {
+          ctx.clearRect(0, 0, W, H);
+          let alive = 0;
+          parts.forEach(p => {
+            p.life++;
+            if (p.life > p.max) return;
+            alive++;
+            p.vy += 0.28;
+            p.vx *= 0.99;
+            p.vy *= 0.99;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.rot += p.vr;
+            const fade = Math.min(1, (p.max - p.life) / 25);
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, fade);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.color;
+            if (p.round) {
+              ctx.beginPath();
+              ctx.arc(0, 0, p.size / 2, 0, 6.283);
+              ctx.fill();
+            } else {
+              ctx.fillRect(-p.size / 2, -p.size / 3, p.size, p.size * 0.66);
+            }
+            ctx.restore();
+          });
+          if (alive > 0) {
+            confettiRAF = requestAnimationFrame(frame);
+          } else {
+            confettiRAF = null;
+            ctx.clearRect(0, 0, W, H);
+            canvas.classList.add('hidden');
+          }
+        }
+        confettiRAF = requestAnimationFrame(frame);
+      } catch (e) { /* Konfetti nicht verfügbar: ignorieren */ }
+    }
+
+    function bumpBlitzCounter() {
+      const box = blitzCounter.parentElement;
+      box.classList.remove('bump');
+      void box.offsetWidth;
+      box.classList.add('bump');
+    }
+
+    function registerCorrect() {
+      lastWasBlitz = false;
+      if (currentItem && !currentItem.failed) {
+        firstTryCorrect++;
+        raiseWordLevel(itemVerbId(currentItem));
+        const limit = BLITZ_SECONDS[currentMode] || 6;
+        if ((MAX_TIME - timeLeft) <= limit) {
+          blitzCount++;
+          lastWasBlitz = true;
+          blitzCounter.innerText = blitzCount;
+          bumpBlitzCounter();
+        }
+      }
+    }
+
+    function validateDrop(selectedCat) {
+      if (!answerOpen) return;
+      stopTimer();
+      if (selectedCat === currentItem.cat) {
+        registerCorrect();
+        triggerSuccessVisualAndAudio(currentItem);
+      } else {
+        const correctCatObj = CATEGORIES[currentItem.cat];
+        handleWrongAnswer(`Das Verb <b>"${currentItem.base}"</b> gehört in:<br><br><span class="font-bold text-indigo-600">${correctCatObj.title}</span><br>(${currentItem.base} - ${currentItem.past} - ${currentItem.part})`);
+      }
+    }
+
+    function checkTranslationAnswer(selectedVerbId) {
+      if (!answerOpen) return;
+      stopTimer();
+      if (selectedVerbId === currentItem.id) {
+        registerCorrect();
+        triggerSuccessVisualAndAudio(currentItem);
+      } else {
+        handleWrongAnswer(`Richtig für "${currentItem.deBase}" ist:<br><br><b>${currentItem.base} - ${currentItem.past} - ${currentItem.part}</b>`);
+      }
+    }
+
+    function checkLevel3Answer(selectedVerbId, formKey) {
+      if (!answerOpen) return;
+      stopTimer();
+      if (selectedVerbId === currentItem.id && formKey === currentItem.targetFormKey) {
+        registerCorrect();
+        triggerSuccessVisualAndAudio(currentItem);
+      } else {
+        const correctWord = currentItem[currentItem.targetFormKey];
+        handleWrongAnswer(`Gesuchte Form war: <b>${correctWord}</b><br><br>Alle Formen: ${currentItem.base} - ${currentItem.past} - ${currentItem.part}`);
+      }
+    }
+
+    /* Erlaubte Antworten: "was/were" akzeptiert "was", "were" oder "was/were" */
+    function isAnswerCorrect(input, target) {
+      const u = input.trim().toLowerCase().replace(/\s+/g, ' ');
+      if (!u) return false;
+      const t = target.toLowerCase();
+      return u === t || t.split('/').map(x => x.trim()).includes(u);
+    }
+
+    function checkTypeAnswer() {
+      if (!answerOpen || currentMode !== 4) return;
+      stopTimer();
+      const target = currentItem[currentItem.targetFormKey];
+      const userVal = document.getElementById('typeInput').value;
+      if (isAnswerCorrect(userVal, target)) {
+        registerCorrect();
+        triggerSuccessVisualAndAudio(currentItem);
+      } else {
+        handleWrongAnswer(`Gesuchte Form war: <b>${target}</b><br><br>Alle Formen: ${currentItem.base} - ${currentItem.past} - ${currentItem.part}`);
+      }
+    }
+
+    function checkGapAnswer() {
+      if (!answerOpen || currentMode !== 5) return;
+      stopTimer();
+      const userVal = document.getElementById('lueckenInput').value;
+      if (isAnswerCorrect(userVal, currentItem.answer)) {
+        registerCorrect();
+        const verbObj = VERB_DATA.find(v => v.id === currentItem.verb);
+        triggerSuccessVisualAndAudio(verbObj || { base: currentItem.answer, past: currentItem.answer, part: currentItem.answer });
+      } else {
+        handleWrongAnswer(`Richtige Form ist: <b>${currentItem.answer}</b>`);
+      }
+    }
+
+    function triggerSuccessVisualAndAudio(item) {
+      answerOpen = false;
+      const blitz = lastWasBlitz;
+
+      const overlay = document.getElementById('successOverlay');
+      const card = document.getElementById('successCard');
+      const iconWrap = document.getElementById('successIconWrap');
+      const icon = document.getElementById('successIcon');
+      const textDisp = document.getElementById('successVerbDisplay');
+      textDisp.innerText = `${item.base} - ${item.past} - ${item.part}`;
+
+      // Blitz: goldener Rahmen, Blitz-Symbol, grosses "BLITZ!"
+      document.getElementById('successBlitz').classList.toggle('hidden', !blitz);
+      card.classList.toggle('border-emerald-400', !blitz);
+      card.classList.toggle('border-amber-400', blitz);
+      card.classList.toggle('blitz-glow', blitz);
+      iconWrap.classList.toggle('bg-emerald-100', !blitz);
+      iconWrap.classList.toggle('text-emerald-500', !blitz);
+      iconWrap.classList.toggle('bg-amber-100', blitz);
+      iconWrap.classList.toggle('text-amber-500', blitz);
+      icon.className = blitz ? 'fa-solid fa-bolt' : 'fa-solid fa-check';
+
+      if (blitz) {
+        playBlitzSound();
+        launchConfetti();
+        // Vorlesen erst nach dem Jingle, damit sich beides nicht überlagert
+        setTimeout(() => { if (runActive) speak3Forms(item); }, 500);
+      } else {
+        speak3Forms(item);
+      }
+
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-100');
+
+      successTimeout = setTimeout(() => {
+        successTimeout = null;
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        nextQueueItem();
+      }, blitz ? 1700 : 1200);
+    }
+
+    function showModal(isSuccess, title, bodyHtml) {
+      const modal = document.getElementById('feedbackModal');
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalBody').innerHTML = bodyHtml;
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('feedbackModal').classList.add('hidden');
+      nextQueueItem();
+    }
+
+    /* Sterne pro Durchgang:
+       10 von 10 beim ersten Versuch  -> 3 Sterne
+       7, 8 oder 9 beim ersten Versuch -> 2 Sterne
+       weniger als 7                   -> 1 Stern
+       Pro Level werden die Sterne addiert, max. 20. */
+    function finishLevel() {
+      if (currentLevel === 6) { finishTraining(); return; }
+      runActive = false;
+      delete pausedRuns[currentLevel];
+      document.getElementById('modalTitleLevel').innerText = 'LEVEL ABGESCHLOSSEN!';
+      document.getElementById('modalStarsLabel').classList.remove('hidden');
+      document.getElementById('modalContinueBtn').innerText = 'ZURÜCK ZUM MENÜ';
+      let earned = 1;
+      if (firstTryCorrect >= WORDS_PER_RUN) {
+        earned = 3;
+      } else if (firstTryCorrect >= 7) {
+        earned = 2;
+      }
+
+      const before = levelStars[currentLevel];
+      const after = Math.min(MAX_STARS_PER_LEVEL, before + earned);
+      const actuallyAdded = after - before;
+      levelStars[currentLevel] = after;
+      saveStars();
+
+      let starsHtml = '';
+      for (let i = 0; i < 3; i++) {
+        if (i < earned) {
+          starsHtml += '<i class="fa-solid fa-star text-amber-400"></i>';
+        } else {
+          starsHtml += '<i class="fa-regular fa-star text-slate-300"></i>';
+        }
+      }
+
+      document.getElementById('modalStarsEarned').innerHTML = starsHtml;
+      document.getElementById('modalFirstTry').innerText = `${firstTryCorrect} von ${WORDS_PER_RUN} beim ersten Versuch richtig`;
+      document.getElementById('modalBlitz').innerHTML = `<i class="fa-solid fa-bolt"></i> ${blitzCount} Blitz-Antworten`;
+      document.getElementById('modalErrorSummary').innerText = `${errorsCount} Fehler in diesem Durchgang`;
+
+      let totalText = `Level ${currentLevel}: ${after} / ${MAX_STARS_PER_LEVEL} <i class="fa-solid fa-star text-amber-400"></i>`;
+      if (actuallyAdded < earned) {
+        totalText += ' (Maximum erreicht!)';
+      }
+      document.getElementById('modalLevelTotal').innerHTML = totalText;
+      document.getElementById('levelCompleteModal').classList.remove('hidden');
+
+      renderStarsMenu();
+    }
+
+    function renderStarsMenu() {
+      let earnedStarsTotal = 0;
+
+      for (let lvl = 1; lvl <= 5; lvl++) {
+        const starCount = levelStars[lvl];
+        earnedStarsTotal += starCount;
+
+        const label = document.getElementById(`level${lvl}Stars`);
+        if (label) label.innerText = `${starCount} / ${MAX_STARS_PER_LEVEL}`;
+
+        const bar = document.getElementById(`level${lvl}Bar`);
+        if (bar) bar.style.width = `${(starCount / MAX_STARS_PER_LEVEL) * 100}%`;
+      }
+
+      totalStarsCount.innerText = earnedStarsTotal;
+      renderLevel6Info();
+      renderResumeBadges();
+    }
+  </script>
+</body>
+</html>
